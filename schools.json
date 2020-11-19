@@ -6,7 +6,7 @@ markers = [
      "lat": 40.87289639093452,
      "lng": -73.89430046081544,
      "teamTaught": 1,
-     "leadership": 0,
+     "leadership": 4,
      "info_leadership": "lehman leadership test",
      "info_teamtaught": "test",
      "info_partnership": "test"
@@ -28,7 +28,7 @@ markers = [
      "lat": 40.817885338310575,
      "lng": -73.92766714096071,
      "teamTaught": 0,
-     "leadership": 0,
+     "leadership": 1,
      "info_leadership": "lead test test",
      "info_teamtaught": "team test test test",
      "info_partnership": "partner test"
@@ -39,7 +39,7 @@ markers = [
      "lat": 40.820191232564675,
      "lng": -73.94942522048952,
      "teamTaught": 7,
-     "leadership": 23,
+     "leadership": 26,
      "info_leadership": "lead test",
      "info_teamtaught": "team test",
      "info_partnership": "partner test"
@@ -82,8 +82,8 @@ markers = [
     // "url": 
      "lat": 40.76812671399359,
      "lng": -73.96463871002199,
-     "teamTaught": 4,
-     "leadership": 21,
+     "teamTaught": 5,
+     "leadership": 23,
      "info_leadership": "test",
      "info_teamtaught": "test",
      "info_partnership": "test"
@@ -105,7 +105,7 @@ markers = [
      "lat": 40.76958930130034,
      "lng": -73.98897171020509,
      "teamTaught": 3,
-     "leadership": 15,
+     "leadership": 17,
      "info_leadership": "test",
      "info_teamtaught": "test",
      "info_partnership": "test"
@@ -127,7 +127,7 @@ markers = [
      "lat": 40.75277979493207,
      "lng": -73.98414373397829,
      "teamTaught": 1,
-     "leadership": 0,
+     "leadership": 1,
      "info_leadership": "test",
      "info_teamtaught": "test",
      "info_partnership": "test"
@@ -172,7 +172,7 @@ markers = [
      "lat": 40.74064033927743,
      "lng": -73.98354291915895,
      "teamTaught": 2,
-     "leadership": 15,
+     "leadership": 18,
      "info_leadership": "test",
      "info_teamtaught": "test",
      "info_partnership": "test"
@@ -193,8 +193,8 @@ markers = [
     // "url": 
      "lat": 40.74402189005304,
      "lng": -73.93614292144777,
-     "teamTaught": 6,
-     "leadership": 12,
+     "teamTaught": 7,
+     "leadership": 16,
      "info_leadership": "test",
      "info_teamtaught": "test",
      "info_partnership": "test"
@@ -216,7 +216,7 @@ markers = [
      "lat": 40.73647006518152,
      "lng": -73.81810426712038,
      "teamTaught": 4,
-     "leadership": 14,
+     "leadership": 22,
      "info_leadership": "test",
      "info_teamtaught": "test",
      "info_partnership": "test"
@@ -248,7 +248,7 @@ markers = [
     // "url": 
      "lat": 40.69712005536264,
      "lng": -73.98704051971437,
-     "teamTaught": 2,
+     "teamTaught": 3,
      "leadership": 6,
      "info_leadership": "test",
      "info_teamtaught": "test",
@@ -271,7 +271,7 @@ markers = [
      "lat": 40.63124890076129,
      "lng": -73.95219326019289,
      "teamTaught": 2,
-     "leadership": 8,
+     "leadership": 17,
      "info_leadership": "test",
      "info_teamtaught": "test",
      "info_partnership": "test"
@@ -292,7 +292,7 @@ markers = [
     // "url": 
      "lat": 40.601832479552975,
      "lng": -74.1495180130005,
-     "teamTaught": 6,
+     "teamTaught": 7,
      "leadership": 1,
      "info_leadership": "test",
      "info_teamtaught": "test",
