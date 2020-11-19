@@ -1,0 +1,301 @@
+//add in data for schools
+markers = [
+   {
+     "name": "Lehman College",
+    // "url": 
+     "lat": 40.87289639093452,
+     "lng": -73.89430046081544,
+     "teamTaught": 1,
+     "leadership": 0,
+     "info_leadership": "lehman leadership test",
+     "info_teamtaught": "test",
+     "info_partnership": "test"
+   },
+   {
+     "name": "Bronx Community College",
+   //  "url": 
+     "lat": 40.85790233146444,
+     "lng": -73.91305446624757,
+     "teamTaught": 2,
+     "leadership": 2,
+     "info_leadership": "test",
+     "info_teamtaught": "test",
+     "info_partnership": "test"
+   },
+   {
+     "name": "Hostos Community College",
+    // "url": 
+     "lat": 40.817885338310575,
+     "lng": -73.92766714096071,
+     "teamTaught": 0,
+     "leadership": 0,
+     "info_leadership": "lead test test",
+     "info_teamtaught": "team test test test",
+     "info_partnership": "partner test"
+   },
+   {
+     "name": "City College",
+    // "url": 
+     "lat": 40.820191232564675,
+     "lng": -73.94942522048952,
+     "teamTaught": 7,
+     "leadership": 23,
+     "info_leadership": "lead test",
+     "info_teamtaught": "team test",
+     "info_partnership": "partner test"
+   },
+   {
+     "name": "Advanced Science Research Center",
+    // "url": 
+     "lat": 40.815660561542444,
+     "lng": -73.9501976966858,
+     "teamTaught": 0,
+     "leadership": 0,
+     "info_leadership": "test",
+     "info_teamtaught": "test",
+     "info_partnership": "test"
+   },
+   {
+     "name": "School of Public Health",
+    // "url":
+     "lat": 40.80750782222972,
+     "lng": -73.94418954849245,
+     "teamTaught": 1,
+     "leadership": 0,
+     "info_leadership": "test",
+     "info_teamtaught": "test",
+     "info_partnership": "test"
+   },
+   {
+     "name": "Silberman School of Social Work",
+    // "url": 
+     "lat": 40.79990635821681,
+     "lng": -73.93936157226564,
+     "teamTaught": 0,
+     "leadership": 0,
+     "info_leadership": "test",
+     "info_teamtaught": "test",
+     "info_partnership": "test"
+   },
+   {
+     "name": "Hunter College",
+    // "url": 
+     "lat": 40.76812671399359,
+     "lng": -73.96463871002199,
+     "teamTaught": 4,
+     "leadership": 21,
+     "info_leadership": "test",
+     "info_teamtaught": "test",
+     "info_partnership": "test"
+   },
+   {
+     "name": "Macaulay Honors College",
+    // "url": 
+     "lat": 40.7740215567788,
+     "lng": -73.98012042045595,
+     "teamTaught": 1,
+     "leadership": 4,
+     "info_leadership": "test",
+     "info_teamtaught": "test",
+     "info_partnership": "test"
+   },
+   {
+     "name": "John Jay College",
+    // "url": 
+     "lat": 40.76958930130034,
+     "lng": -73.98897171020509,
+     "teamTaught": 3,
+     "leadership": 15,
+     "info_leadership": "test",
+     "info_teamtaught": "test",
+     "info_partnership": "test"
+   },   
+   {
+     "name": "School of Labor and Urban Studies",
+    // "url": 
+     "lat": 40.75492947089871,
+     "lng": -73.98162245750429,
+     "teamTaught": 0,
+     "leadership": 0,
+     "info_leadership": "test",
+     "info_teamtaught": "test",
+     "info_partnership": "test"
+   },   
+   {
+     "name": "Guttman Community College",
+    // "url": 
+     "lat": 40.75277979493207,
+     "lng": -73.98414373397829,
+     "teamTaught": 1,
+     "leadership": 0,
+     "info_leadership": "test",
+     "info_teamtaught": "test",
+     "info_partnership": "test"
+   }, 
+   {
+     "name": "Craig Newmark Graduate School of Journalism",
+    // "url": 
+     "lat": 40.75554713431404,
+     "lng": -73.98889124393465,
+     "teamTaught": 0,
+     "leadership": 0,
+     "info_leadership": "test",
+     "info_teamtaught": "test",
+     "info_partnership": "test"
+   }, 
+   {
+     "name": "The Graduate Center",
+    // "url": 
+     "lat": 40.74854525826425,
+     "lng": -73.98367166519166,
+     "actualTeamTaught": 26,
+     "teamTaught": 0,
+     "leadership": 0,
+     "info_leadership": "test",
+     "info_teamtaught": "test",
+     "info_partnership": "test"
+   }, 
+   {
+     "name": "School of Professional Studies",
+    // "url": 
+     "lat": 40.748573706147354,
+     "lng": -73.98985147476198,
+     "teamTaught": 0,
+     "leadership": 0,
+     "info_leadership": "test",
+     "info_teamtaught": "test",
+     "info_partnership": "test"
+   }, 
+   {
+     "name": "Baruch College",
+    // "url": 
+     "lat": 40.74064033927743,
+     "lng": -73.98354291915895,
+     "teamTaught": 2,
+     "leadership": 15,
+     "info_leadership": "test",
+     "info_teamtaught": "test",
+     "info_partnership": "test"
+   }, 
+   {
+     "name": "Manhattan Community College",
+    // "url": 
+     "lat": 40.71890001704013,
+     "lng": -74.01154518127443,
+     "teamTaught": 3,
+     "leadership": 8,
+     "info_leadership": "test",
+     "info_teamtaught": "test",
+     "info_partnership": "test"
+   }, 
+   {
+     "name": "LaGuardia Community College",
+    // "url": 
+     "lat": 40.74402189005304,
+     "lng": -73.93614292144777,
+     "teamTaught": 6,
+     "leadership": 12,
+     "info_leadership": "test",
+     "info_teamtaught": "test",
+     "info_partnership": "test"
+   }, 
+   {
+     "name": "CUNY School of Law",
+    // "url": 
+     "lat": 40.74790720968901,
+     "lng": -73.9436960220337,
+     "teamTaught": 0,
+     "leadership": 0,
+     "info_leadership": "test",
+     "info_teamtaught": "test",
+     "info_partnership": "test"
+   },
+   {
+     "name": "Queens College",
+    // "url": 
+     "lat": 40.73647006518152,
+     "lng": -73.81810426712038,
+     "teamTaught": 4,
+     "leadership": 14,
+     "info_leadership": "test",
+     "info_teamtaught": "test",
+     "info_partnership": "test"
+   },
+   {
+     "name": "Queensborough Community College",
+    // "url": 
+     "lat": 40.75593723456708,
+     "lng": -73.7571430206299,
+     "teamTaught": 0,
+     "leadership": 0,
+     "info_leadership": "test",
+     "info_teamtaught": "test",
+     "info_partnership": "test"
+   },
+   {
+     "name": "York College",
+    // "url": 
+     "lat": 40.70081290280357,
+     "lng": -73.7970542907715,
+     "teamTaught": 0,
+     "leadership": 3,
+     "info_leadership": "test",
+     "info_teamtaught": "test",
+     "info_partnership": "test"
+   },
+   {
+     "name": "New York City College of Technology",
+    // "url": 
+     "lat": 40.69712005536264,
+     "lng": -73.98704051971437,
+     "teamTaught": 2,
+     "leadership": 6,
+     "info_leadership": "test",
+     "info_teamtaught": "test",
+     "info_partnership": "test"
+   },
+   {
+     "name": "Medgers Ever College",
+    // "url":
+     "lat": 40.666707287985304,
+     "lng": -73.95476818084718,
+     "teamTaught": 0,
+     "leadership": 1,
+     "info_leadership": "test",
+     "info_teamtaught": "test",
+     "info_partnership": "test"
+   },
+   {
+     "name": "Brooklyn College",
+    // "url": 
+     "lat": 40.63124890076129,
+     "lng": -73.95219326019289,
+     "teamTaught": 2,
+     "leadership": 8,
+     "info_leadership": "test",
+     "info_teamtaught": "test",
+     "info_partnership": "test"
+   },
+   {
+     "name": "Kingsborourgh Community College",
+    // "url": 
+     "lat": 40.57833565057272,
+     "lng": -73.93408298492433,
+     "teamTaught": 1,
+     "leadership": 7,
+     "info_leadership": "test",
+     "info_teamtaught": "test",
+     "info_partnership": "test"
+   },
+   {
+     "name": "College of Staten Island",
+    // "url": 
+     "lat": 40.601832479552975,
+     "lng": -74.1495180130005,
+     "teamTaught": 6,
+     "leadership": 1,
+     "info_leadership": "test",
+     "info_teamtaught": "test",
+     "info_partnership": "test"
+   },
+];

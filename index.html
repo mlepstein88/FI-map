@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>FI Map</title>
+  <link rel="icon" href="fi_logo.png">
+  <link rel="stylesheet" type="text/css" href="leaflet/leaflet.css" />
+  <link rel="stylesheet" href="sidebar-v2/css/leaflet-sidebar.css" />
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <script type="text/javascript" src="leaflet/leaflet.js"></script>
+  <script type="text/javascript" src="shapefile/leaflet.shpfile.js"></script>
+  <script type="text/javascript" src="shapefile/shp.js"></script>
+  <script type="text/javascript" src="sidebar-v2/js/leaflet-sidebar.js"></script>
+  <script type="text/javascript" src="schools.json"></script>
+  <script type="text/javascript" src="leaflet/Leaflet.Polyline.SnakeAnim-master/L.Polyline.SnakeAnim.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700'
+  rel='stylesheet' type='text/css'>
+
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+    html, body, #mapid {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <div id="mySidenav" class="sidenav">
+    <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
+    <br>
+    <a target="_blank" rel="noopener noreferrer" href="https://futuresinitiative.org" id="homelink" class="logo"><img src="logos/fi_logo.png"></a>
+    <br>
+    <a id="program_leadership">Leadership Fellows</a>
+    <br>
+    <a id="program_teamtaught">Team Taught Courses</a>
+    <br>
+    <a id="program_partnerships">Institutional Partnerships</a> 
+
+  </div>
+
+  <div id="infobar_leadership" class="proginfo">
+
+    <br><br>
+    <a target="_blank" rel="noopener noreferrer" href="https://futuresinitiative.org/mentors/"><img border="0" alt="Leadership Fellows" src="logos/leaders2.png "width="175"></a>
+
+    <a>The Futures Initiative&apos;s Leadership and Peer Mentoring Program supports CUNY undergraduate students who are learning to be leaders within their colleges and within their communities. The program believes that great leadership means representing and responding to one&apos;s peers in a way that supports everyone&apos;s success.</a>
+  </div>
+
+  <div id="infobar_teamtaught" class="proginfo">
+
+    <br><br>
+    <a target="_blank" rel="noopener noreferrer" href="https://futuresinitiative.org/courses/"><img border="0" alt="Team Taught Courses" src="logos/courses2.png "width="175"></a>
+
+    <a>One of the Futures Initiative&apos;s key program areas are a unique set of interdisciplinary, inter-institutional team-taught courses. Following a competitive, CUNY-wide application process, five to seven courses are selected annually for support from the Futures Initiative, with faculty teaching these courses designated as Faculty Fellows. These courses are designed to exemplify equity and innovation, and promote the Futures Initiative&apos;s goals of increasing faculty diversity and establishing robust peer mentoring among faculty members across the CUNY system. Spanning many content areas, the courses emphasize creative, student-centered pedagogy and interdisciplinarity in their methods.</a>
+  </div>
+
+  <div id="infobar_partnerships" class="proginfo">
+
+    <br><br> 
+    <a target="_blank" rel="noopener noreferrer" href="https://futuresinitiative.org/"><img border="0" alt="Institutional Partnerships" src="logos/partnerships.png "width="175"></a>
+
+    <a><p>Hostos Community College, Guttman Community College, Borough of Manhattan Community College (BMCC), and LaGuardia Community College were selected as partners for the second phase of the CUNY Humanities Alliance because of their geographical distribution, the diversity of their student bodies, their curricular and pedagogical differences, their existing connections to the Graduate Center, and their demonstrated commitment to the kinds of innovative pedagogical approaches this proposal seeks to amplify.</p>
+
+      <p>Hostos Community College is in the South Bronx, enrolls more than 7,000 students, and serves a predominantly Hispanic population. Hostos has long housed an impactful Writing Across the Curriculum Program that trains GC doctoral students to consult with faculty on approaches to writing instruction. In addition, Hostos has developed a wide range of online and hybrid courses in the humanities, an innovative curriculum that includes a vibrant arts center and a program in Game Design.</p>
+
+      <p>Guttman Community College, located blocks from the Graduate Center on 41st Street, is CUNY&apos;s newest and smallest community college, enrolling just under 1,000 students. Students at Guttman enjoy access to an innovative First-Year Experience curriculum built around a City Seminar that introduces students to humanistic inquiry through exploration of historical and contemporary urban issues.</p>
+
+      <p>Borough of Manhattan Community College is located in Tribeca, and is the largest college at CUNY, enrolling over 26,000 undergraduates. Several BMCC faculty teach and participate in programs at the Graduate Center, and many are GC graduates. BMCC has led efforts in New York City to help Ph.D. candidates envision careers in community college contexts. BMCC has also been at the forefront of the university&apos;s work to reduce the costs of attendance for undergraduates by transitioning course readings to open educational resources.</p>
+
+      <p>Finally, LaGuardia Community College, the Graduate Center&apos;s partner on the first iteration of the CUNY Humanities Alliance, enrolls just under 20,000 students. Continuing the partnership with LaGuardia will allow us to build on the current momentum of the program, and extend it into academic support spaces such as the Center for Teaching and Learning, the Writing Across the Curriculum Program, and the Accessibility Services Office.</p></a>
+    </div>
+
+
+    <div id="rightside" class="rightsidenav"><a><br><br><br>Can put info about the school&apos;s specific involvement in the program here.</a></div>
+
+    <div class = "main" id="mapid" ></div>
+
+
+
+    <script>
+
+
+//set default values
+var lat = 40.73165;
+var lng = -73.85000;
+var zoom = 11;
+
+//create map
+var map = L.map('mapid', {zoomSnap: 0.25,zoomControl: true}).setView([40.73165, -73.8500], 11);
+
+//add tiles
+var tiles = L.tileLayer('https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+   attribution: "l",
+  maxZoom: 18,
+  id: 'OSMCarto'
+})
+tiles.addTo(map);
+
+//insert cuny buildings - shapefiles borrowed from - https://www.baruch.cuny.edu/confluence/display/geoportal/CUNY+Campus+Facilities - thanks!
+var shpfile = new L.Shapefile('cuny_buildings_2019.zip', {
+  onEachFeature: function(feature, layer) {
+    if (feature.properties) {
+      layer.bindPopup(Object.keys(feature.properties).map(function(k) {
+        return k + ": " + feature.properties[k];
+      }), 
+      {
+        maxHeight: 200
+      });
+    }
+  }
+});
+shpfile.addTo(map);
+shpfile.once("data:loaded", function() {
+  console.log("finished loaded shapefile");
+});
+
+//make popup labels for schools
+var schoolLabels = L.featureGroup();
+
+for ( var i=0; i < markers.length; ++i ) {
+  var circle = L.circle([markers[i].lat, markers[i].lng], {
+   stroke: false,
+   fillOpacity: 0,
+          //radius: test,
+          radius: 300,
+          schoolname: markers[i].name,
+          color: "#EF6630"
+        }).bindTooltip(markers[i].name).addTo(schoolLabels)
+}
+schoolLabels.addTo(map);
+
+//make circle groups for each of the categories (feature groups) we want to display
+
+//team taught courses
+var teamTaught = L.featureGroup();
+
+//make circles
+for ( var i=0; i < markers.length; ++i ) {
+  var circle = L.circle([markers[i].lat, markers[i].lng], {
+   stroke: false,
+   fillOpacity: 0.5,
+   radius: markers[i].teamTaught*300,
+          //log measure?
+          //radius: Math.log(markers[i].teamTaught+1)*1000,
+          schoolname: markers[i].name,
+          color: "#EF6630",
+          info: markers[i].info_teamtaught,
+          lat: markers[i].lat,
+          lng: markers[i].lng,
+            zoom: 11
+        }).bindTooltip("<center><b>" + markers[i].name + "</b><br>" + markers[i].teamTaught + " Faculty Fellowships</center>").addTo(teamTaught).on("click", circleClick)
+}
+
+
+
+
+// leadership fellows
+var leadershipFellows = L.featureGroup();
+
+//make circles
+for ( var i=0; i < markers.length; ++i ) {
+		//test=Math.random()*2000
+    var circle = L.circle([markers[i].lat, markers[i].lng], {
+     stroke: false,
+     fillOpacity: 0.5,
+          //radius: test,
+          radius: markers[i].leadership*100,
+          //use log measures? not sure what looks better
+          //radius: Math.log(markers[i].leadership+1)*750,
+          schoolname: markers[i].name ,
+          color: "#409EAE",
+          info: markers[i].info_leadership,
+          lat: markers[i].lat,
+          lng: markers[i].lng,
+            zoom: 11
+        }).bindTooltip("<center><b>" + markers[i].name + "</b><br>" + markers[i].leadership + " Leadership Fellows</center>").addTo(leadershipFellows).on("click", circleClick)
+  }
+
+
+
+//define lines for institutional partnerships 
+
+var partnershipLines = L.featureGroup();
+
+var line = L.polyline([[markers[13].lat, markers[13].lng],[markers[2].lat, markers[2].lng]], {snakingSpeed: 300, color: '#4C76D6', weight: 4}).addTo(partnershipLines),
+line2 = L.polyline([[markers[13].lat, markers[13].lng],[markers[16].lat, markers[16].lng]], {snakingSpeed: 200, color: '#4C76D6', weight: 4}).addTo(partnershipLines),
+line3 = L.polyline([[markers[13].lat, markers[13].lng],[markers[11].lat, markers[11].lng]], {snakingSpeed: 200, color: '#4C76D6', weight: 4}).addTo(partnershipLines),
+line4 = L.polyline([[markers[13].lat, markers[13].lng],[markers[17].lat, markers[17].lng]], {snakingSpeed: 200, color: '#4C76D6', weight: 4}).addTo(partnershipLines),
+
+line5 = L.polyline([[markers[2].lat, markers[2].lng],[markers[16].lat, markers[16].lng]], {snakingSpeed: 300, opacity: 0.5, color: '#4C76D6'}).addTo(partnershipLines),
+line6 = L.polyline([[markers[2].lat, markers[2].lng],[markers[11].lat, markers[11].lng]], {snakingSpeed: 300, opacity: 0.5, color: '#4C76D6'}).addTo(partnershipLines),
+line7 = L.polyline([[markers[2].lat, markers[2].lng],[markers[17].lat, markers[17].lng]], {snakingSpeed: 200, opacity: 0.5, color: '#4C76D6'}).addTo(partnershipLines),
+
+line8 = L.polyline([[markers[11].lat, markers[11].lng],[markers[16].lat, markers[16].lng]], {snakingSpeed: 200, opacity: 0.5, color: '#4C76D6'}).addTo(partnershipLines),
+line9 = L.polyline([[markers[11].lat, markers[11].lng],[markers[17].lat, markers[17].lng]], {snakingSpeed: 200, opacity: 0.5, color: '#4C76D6'}).addTo(partnershipLines),
+line10 = L.polyline([[markers[11].lat, markers[11].lng],[markers[2].lat, markers[2].lng]], {snakingSpeed: 300, opacity: 0.5, color: '#4C76D6'}).addTo(partnershipLines),
+
+line11 = L.polyline([[markers[16].lat, markers[16].lng],[markers[17].lat, markers[17].lng]], {snakingSpeed: 200, opacity: 0.5, color: '#4C76D6'}).addTo(partnershipLines);
+
+
+//partnership labels
+//labels (may need to adjust so zooming looks right)
+var partnershipLabels = L.featureGroup();
+
+var textLatLng = [markers[13].lat-.0005, markers[13].lng];  
+var myTextLabel = L.marker(textLatLng, {
+  icon: L.divIcon({
+                className: 'text-labels',   // Set class for CSS styling
+                html: 'The<br>Graduate<br>Center'
+              }),
+  schoolname: markers[13].name,
+            zIndexOffset: 1000,     // Make appear above other map features
+            info: markers[13].info_partnership,
+            lat: markers[13].lat,
+            long: markers[13].lng,
+            ip: true
+          }).addTo(partnershipLabels).on("click", circleClick);
+
+
+var textLatLng = [markers[2].lat-.0005, markers[2].lng];  
+var myTextLabel = L.marker(textLatLng, {
+  icon: L.divIcon({
+                className: 'text-labels',   // Set class for CSS styling
+                html: 'Hostos<br>Community College'
+              }),
+  schoolname: markers[2].name,
+            zIndexOffset: 1000,     // Make appear above other map features
+            info: markers[2].info_partnership,
+            lat: markers[2].lat,
+            long: markers[2].lng,
+            ip: true
+          }).addTo(partnershipLabels).on("click", circleClick);
+
+var textLatLng = [markers[11].lat+.0005, markers[11].lng];  
+var myTextLabel = L.marker(textLatLng, {
+  icon: L.divIcon({
+                className: 'text-labels',   // Set class for CSS styling
+                html: 'Guttman Community College'
+              }),
+  schoolname: markers[11].name,
+            zIndexOffset: 1000,     // Make appear above other map features
+            info: markers[11].info_partnership,
+            lat: markers[11].lat,
+            long: markers[11].lng,
+            ip: true
+          }).addTo(partnershipLabels).on("click", circleClick);
+
+var textLatLng = [markers[16].lat-.0005, markers[16].lng];  
+var myTextLabel = L.marker(textLatLng, {
+  icon: L.divIcon({
+                className: 'text-labels',   // Set class for CSS styling
+                html: 'Manhattan<br>Community College'
+              }),
+  schoolname: markers[16].name,
+            zIndexOffset: 1000,     // Make appear above other map features
+            info: markers[16].info_partnership,
+            lat: markers[16].lat,
+            long: markers[16].lng,
+            ip: true
+          }).addTo(partnershipLabels).on("click", circleClick);
+
+var textLatLng = [markers[17].lat-.0005, markers[17].lng];  
+var myTextLabel = L.marker(textLatLng, {
+  icon: L.divIcon({
+                className: 'text-labels',   // Set class for CSS styling
+                html: 'LaGuardia<br>Community College'
+              }),
+            schoolname: markers[17].name,
+            zIndexOffset: 1000,     // Make appear above other map features
+            info: markers[17].info_partnership,
+            lat: markers[17].lat,
+            long: markers[17].lng,
+            ip: true
+          }).addTo(partnershipLabels).on("click", circleClick);
+
+
+
+
+//circle click function - display extra info for schools when they are clicked on
+var rightopen=false;
+function circleClick(e) {
+
+
+  if (rightopen == false){
+    document.getElementById("rightside").style.width = "250px";
+    document.getElementById("rightside").innerHTML = "<a><br><br>" + this.options.info + "</a>";
+    rightopen=true;
+    currschool=this.options.schoolname;
+    map.setView([this.options.lat, this.options.lng+.05], 12);
+
+
+  } else if (rightopen == true && currschool==this.options.schoolname){
+    document.getElementById("rightside").style.width = "0px";
+    rightopen=false;
+
+
+    if (this.options.ip==true){
+      map.setView([40.76465, -73.95500], 12.50);
+    } else {
+      map.setView([40.73965, -73.94500], 11);
+    }
+
+  } else if (rightopen == true && currschool!=this.options.schoolname){
+    document.getElementById("rightside").innerHTML = "<a><br><br>" + this.options.info + "</a>";
+    currschool=this.options.schoolname;
+    map.setView([this.options.lat, this.options.lng+.05], 12);
+  }
+}
+
+
+
+
+
+//set up links for navigation
+var open1 = false;
+var open2 = false;
+var open4=false;
+
+window.onload = function() {
+
+          var program_leadership = document.getElementById("program_leadership");
+          var program_leadership2 = document.getElementById("program_leadership2");
+          var program_teamtaught = document.getElementById("program_teamtaught");
+          var program_partnerships = document.getElementById("program_partnerships");
+        }
+
+
+//open and close for leadership
+program_leadership.onclick = function() {
+
+//close other possiblilites
+map.removeLayer(teamTaught);
+map.removeLayer(partnershipLabels);
+
+document.getElementById("infobar_teamtaught").style.width = "0";
+document.getElementById("infobar_teamtaught").style.marginLeft = "0";
+
+document.getElementById("infobar_partnerships").style.width = "0";
+document.getElementById("infobar_partnerships").style.marginLeft = "0";
+
+document.getElementById("rightside").style.width = "0px";
+rightopen=false;
+
+//reset view and remove lines
+map.setView([40.73965, -73.94500], 11);
+map.removeLayer(partnershipLines)
+
+
+
+open2=false;
+open4=false
+
+if (open1 == false){
+
+  leadershipFellows.addTo(map);
+
+  document.getElementById("infobar_leadership").style.width = "250px";
+  document.getElementById("infobar_leadership").style.marginLeft = "250px";
+  open1 = true;
+
+} else {
+	map.removeLayer(teamTaught);
+	map.removeLayer(leadershipFellows);
+
+  document.getElementById("infobar_leadership").style.width = "0px";
+  document.getElementById("infobar_leadership").style.marginLeft = "0px";
+  map.setView([40.73165, -73.8500], 11);
+  open1 = false;
+}
+
+return false;
+}
+
+
+
+// team taught menu
+program_teamtaught.onclick = function() {
+
+//remove other possibilities	
+map.removeLayer(leadershipFellows);
+map.removeLayer(partnershipLabels);
+
+document.getElementById("infobar_leadership").style.width = "0";
+document.getElementById("infobar_leadership").style.marginLeft = "0";
+
+document.getElementById("infobar_partnerships").style.width = "0";
+document.getElementById("infobar_partnerships").style.marginLeft = "0";
+
+document.getElementById("rightside").style.width = "0px";
+rightopen=false;
+
+//reset view and remove lines
+
+map.setView([40.73965, -73.94500], 11);
+map.removeLayer(partnershipLines)
+
+open1=false;
+open4=false;
+
+if (open2 == false){
+
+
+
+  teamTaught.addTo(map);
+
+  document.getElementById("infobar_teamtaught").style.width = "250px";
+  document.getElementById("infobar_teamtaught").style.marginLeft = "250px";
+  open2 = true;
+
+} else {
+  map.removeLayer(leadershipFellows);
+  map.removeLayer(teamTaught);
+  document.getElementById("infobar_teamtaught").style.width = "0px";
+  document.getElementById("infobar_teamtaught").style.marginLeft = "0px";
+  map.setView([40.73165, -73.8500], 11);
+  open2 = false;
+}
+
+return false;
+}
+
+
+// Institutional partnerships menu
+program_partnerships.onclick = function() {
+
+//remove other possibilities	
+map.removeLayer(leadershipFellows);
+map.removeLayer(teamTaught);
+
+document.getElementById("infobar_leadership").style.width = "0";
+document.getElementById("infobar_leadership").style.marginLeft = "0";
+
+document.getElementById("infobar_teamtaught").style.width = "0";
+document.getElementById("infobar_teamtaught").style.marginLeft = "0";
+
+document.getElementById("rightside").style.width = "0px";
+rightopen=false;
+
+open1=false;
+open2=false
+if (open4 == false){
+
+
+
+//teamTaught.addTo(map);
+
+document.getElementById("infobar_partnerships").style.width = "250px";
+document.getElementById("infobar_partnerships").style.marginLeft = "250px";
+open4 = true;
+
+//set view and add lines/labels
+map.setView([40.76465, -73.95500], 12.50);
+
+partnershipLines.addTo(map);
+partnershipLabels.addTo(map);
+
+} else {
+  map.removeLayer(leadershipFellows);
+  map.removeLayer(teamTaught);
+  map.removeLayer(partnershipLabels);
+  map.removeLayer(partnershipLines)
+
+  document.getElementById("infobar_partnerships").style.width = "0px";
+  document.getElementById("infobar_partnerships").style.marginLeft = "0px";
+  map.setView([40.73165, -73.8500], 11);
+  open4 = false;
+}
+
+return false;
+}
+
+
+
+
+
+
+// //STILL NOT WORKING
+// //legend 
+// function getRadius(r) {
+// return  r > 100 ? 12 :
+//         r > 50 ? 9 :
+//         r > 20 ? 6 :
+//         r > 10 ? 4 :
+//         0;
+// }
+
+//  var legend = L.control({position: 'bottomright'});
+//  legend.onAdd = function (map) {
+
+//  var div = L.DomUtil.create('div', 'info legend');
+//  grades = [15, 40, 80, 400],
+//  labels = ['<strong>Amount of units</strong>'],
+//  categories = ['N/A','<50','51-100', '>100'];
+
+//  for (var i = 0; i < grades.length; i++) {
+//         var grade = grades[i];//*0.5;
+//    labels.push(
+//         '<i class="circlepadding" style="width: '+Math.max(8,(7-2.2*getRadius(grade)))+'px;"></i> <i style="background: #8080A0; width: '+getRadius(grade)*2+'px; height: '+getRadius(grade)*2+'px; border-radius: 50%; margin-top: '+Math.max(0,(9-getRadius(grade)))+'px;"></i><i class="circlepadding" style="width: '+Math.max(2,(25-2*getRadius(grade)))+'px;"></i> ' + categories[i]);
+//    }
+//  div.innerHTML = labels.join('<br>');
+//  return div;
+//  };
+//  legend.addTo(map);
+
+
+
+</script>
+
+
+
+</body>
+</html>

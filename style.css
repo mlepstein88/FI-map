@@ -1,0 +1,171 @@
+ /* The navigation menu links */
+.proginfo {
+  height: 100%;
+  width: 0px;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  background-color: LightGray;
+  overflow-x: hidden;
+  transition: 0.5s;
+  box-shadow:  2px 0 5px 0 #888888; 
+
+}
+.proginfo a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 16px;
+  color: #484848;
+  display: block;
+  font-family: Open Sans;
+  transition: 0.3s;
+  line-height: 1.25;
+
+}
+
+ /* The sidenav */
+.sidenav {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  background-color: black;
+  overflow-x: hidden;
+  padding-top: 1px;
+  box-shadow:  2px 0 3px 0 #888888; 
+}
+
+
+.rightsidenav {
+  
+  height: 100%;
+  width: 0px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: LightGray;
+  overflow-x: hidden;
+  transition: 0.5s;
+  box-shadow:  -2px 0 5px 0 #888888; 
+  z-index: 4;
+}
+.rightsidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #484848;
+  display: block;
+  font-family: Open Sans;
+  transition: 0.3s;
+  line-height: 1.25;
+
+}
+
+
+/* Page content */
+.main {
+  margin-left: 250px; /* Same as the width of the sidenav */
+} 
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 22px;
+  color: #818181;
+  display: block;
+  font-family: Open Sans;
+  transition: 0.3s;
+
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #f1f1f1;
+  cursor: pointer;
+}
+
+
+
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+.main {
+  transition: margin-left .5s;
+  padding: 20px;
+  position: fixed;
+  z-index: 1;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+} 
+
+
+.logo {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+}
+
+      .text-labels {
+            font-size: 1em;
+            font-weight: 700;
+            color: black;
+            white-space: nowrap;
+            text-align: center;
+
+            /* Use color, background, set margins for offset, etc */
+        }
+
+/*add key? */
+ .info
+  {
+        padding: 6px 8px;
+        font: 13px/16px Verdana, Geneva, sans-serif;
+        background: white;
+        background: rgba(255,255,255,0.8);
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        border-radius: 10px;
+        z-index: 5;
+
+    }
+
+   .legend {
+        line-height: 19px;
+        padding:7px;
+        color: #555;
+        z-index: 6;
+       }
+
+   .legend i {
+        width: 15px;
+        height: 15px;
+        float: left;
+        margin-right: 8px;
+        opacity: 0.7;
+      }
+
+    .circle
+ {
+float: left;
+border: 1px solid #222;
+border-radius: 50%;
+z-index: 7;
+ }
+
+\
+
+     .text-labels {
+            font-size: 1em;
+            font-weight: 600;
+            color: black;
+            line-height: 12px;
+            text-shadow: 2px 2px 5px white;
+            /* Use color, background, set margins for offset, etc */
+        }
