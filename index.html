@@ -5,14 +5,13 @@
 	<title>FI Map</title>
   <link rel="icon" href="fi_logo.png">
   <link rel="stylesheet" type="text/css" href="leaflet/leaflet.css" />
-  <link rel="stylesheet" href="sidebar-v2/css/leaflet-sidebar.css" />
+
 
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
   <script type="text/javascript" src="leaflet/leaflet.js"></script>
   <script type="text/javascript" src="shapefile/leaflet.shpfile.js"></script>
   <script type="text/javascript" src="shapefile/shp.js"></script>
-  <script type="text/javascript" src="sidebar-v2/js/leaflet-sidebar.js"></script>
   <script type="text/javascript" src="schools.json"></script>
   <script type="text/javascript" src="leaflet/Leaflet.Polyline.SnakeAnim-master/L.Polyline.SnakeAnim.js"></script>
   <link rel="stylesheet" type="text/css" href="style.css">
@@ -36,9 +35,7 @@
 
 <body>
 
-
   <div id="mySidenav" class="sidenav">
-    <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
     <br>
     <a target="_blank" rel="noopener noreferrer" href="https://futuresinitiative.org" id="homelink" class="logo"><img src="logos/fi_logo.png"></a>
     <br>
@@ -47,15 +44,18 @@
     <a id="program_teamtaught">Team Taught Courses</a>
     <br>
     <a id="program_partnerships">Institutional Partnerships</a> 
-
   </div>
+
+
 
   <div id="infobar_leadership" class="proginfo">
 
     <br><br>
     <a target="_blank" rel="noopener noreferrer" href="https://futuresinitiative.org/mentors/"><img border="0" alt="Leadership Fellows" src="logos/leaders2.png "width="175"></a>
 
-    <a>The Futures Initiative&apos;s Leadership and Peer Mentoring Program supports CUNY undergraduate students who are learning to be leaders within their colleges and within their communities. The program believes that great leadership means representing and responding to one&apos;s peers in a way that supports everyone&apos;s success.</a>
+    <a>The Futures Initiative&apos;s Undergraduate Leadership Program (FIULP) supports CUNY undergraduate students who are learning to be leaders within their colleges and within their communities. The program believes great mentorship and leadership means representing and responding to one&apos;s peers in a way that supports everyone&apos;s success. 
+    <br><br>For the 2019-2021 cohorts, we are pleased to announce a new partnership with "The Promise and Perils of Democracy Project" supported by the Carnegie Corporation of New York. In addition to the focus on leadership and peer mentoring, we will continue to address questions of democracy, informed public engagement and to explore possible solutions to the current crisis of democracy.
+    <br><br>This year, The Futures Initiative Undergraduate Leadership Program will begin a new iteration of the program that will continue for the next five years entitled: "The CUNY Peer Leader Program." The new iteration will combine elements of the Futures Initiative Undergraduate Leadership program and the CUNY Humanities Alliance Scholars to focus on learning leadership and peer mentoring skills in addition to exploring humanities education and career pathways. The new iteration of the program will be supported by The Andrew W. Mellon Foundation and is slated to begin August 2020.</a>
   </div>
 
   <div id="infobar_teamtaught" class="proginfo">
@@ -71,7 +71,7 @@
     <br><br> 
     <a target="_blank" rel="noopener noreferrer" href="https://futuresinitiative.org/"><img border="0" alt="Institutional Partnerships" src="logos/partnerships.png "width="175"></a>
 
-    <a><p>Hostos Community College, Guttman Community College, Borough of Manhattan Community College (BMCC), and LaGuardia Community College were selected as partners for the second phase of the CUNY Humanities Alliance because of their geographical distribution, the diversity of their student bodies, their curricular and pedagogical differences, their existing connections to the Graduate Center, and their demonstrated commitment to the kinds of innovative pedagogical approaches this proposal seeks to amplify.</p>
+    <a>Hostos Community College, Guttman Community College, Borough of Manhattan Community College (BMCC), and LaGuardia Community College were selected as partners for the second phase of the CUNY Humanities Alliance because of their geographical distribution, the diversity of their student bodies, their curricular and pedagogical differences, their existing connections to the Graduate Center, and their demonstrated commitment to the kinds of innovative pedagogical approaches this proposal seeks to amplify.
 
       <p>Hostos Community College is in the South Bronx, enrolls more than 7,000 students, and serves a predominantly Hispanic population. Hostos has long housed an impactful Writing Across the Curriculum Program that trains GC doctoral students to consult with faculty on approaches to writing instruction. In addition, Hostos has developed a wide range of online and hybrid courses in the humanities, an innovative curriculum that includes a vibrant arts center and a program in Game Design.</p>
 
@@ -86,7 +86,9 @@
     <div id="rightside" class="rightsidenav"><a><br><br><br>Can put info about the school&apos;s specific involvement in the program here.</a></div>
 
     <div class = "main" id="mapid" ></div>
-
+<div class="parent">This div element has position: relative;
+  <div class="absolute"><strong>position: absolute and bottom 10px</strong><br>This div's bottom edge is placed 10 pixels above the bottom edge of the containing element.</div>
+</div>
 
 
     <script>
@@ -98,17 +100,17 @@ var lng = -73.85000;
 var zoom = 11;
 
 //create map
-var map = L.map('mapid', {zoomSnap: 0.25,zoomControl: true}).setView([40.73165, -73.8500], 11);
+var map = L.map('mapid', {zoomSnap: 0.25,zoomControl: true, position: 'topright'}).setView([40.73165, -73.8500], 11);
 
 //add tiles
 var tiles = L.tileLayer('https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-   attribution: "l",
+   attribution: 'display',
   maxZoom: 18,
   id: 'OSMCarto'
 })
 tiles.addTo(map);
 
-//insert cuny buildings - shapefiles borrowed from - https://www.baruch.cuny.edu/confluence/display/geoportal/CUNY+Campus+Facilities - thanks!
+//insert cuny buildings - shapefiles borrowed from https://www.baruch.cuny.edu/confluence/display/geoportal/CUNY+Campus+Facilities - thanks!
 var shpfile = new L.Shapefile('cuny_buildings_2019.zip', {
   onEachFeature: function(feature, layer) {
     if (feature.properties) {
@@ -294,7 +296,7 @@ function circleClick(e) {
 
 
   if (rightopen == false){
-    document.getElementById("rightside").style.width = "250px";
+    document.getElementById("rightside").style.width = "0px"; //currently set to 0 to hide it, if you want to add individual info change to 250px
     document.getElementById("rightside").innerHTML = "<a><br><br>" + this.options.info + "</a>";
     rightopen=true;
     currschool=this.options.schoolname;
@@ -318,9 +320,6 @@ function circleClick(e) {
     map.setView([this.options.lat, this.options.lng+.05], 12);
   }
 }
-
-
-
 
 
 //set up links for navigation
@@ -482,37 +481,6 @@ return false;
 }
 
 
-
-
-
-
-// //STILL NOT WORKING
-// //legend 
-// function getRadius(r) {
-// return  r > 100 ? 12 :
-//         r > 50 ? 9 :
-//         r > 20 ? 6 :
-//         r > 10 ? 4 :
-//         0;
-// }
-
-//  var legend = L.control({position: 'bottomright'});
-//  legend.onAdd = function (map) {
-
-//  var div = L.DomUtil.create('div', 'info legend');
-//  grades = [15, 40, 80, 400],
-//  labels = ['<strong>Amount of units</strong>'],
-//  categories = ['N/A','<50','51-100', '>100'];
-
-//  for (var i = 0; i < grades.length; i++) {
-//         var grade = grades[i];//*0.5;
-//    labels.push(
-//         '<i class="circlepadding" style="width: '+Math.max(8,(7-2.2*getRadius(grade)))+'px;"></i> <i style="background: #8080A0; width: '+getRadius(grade)*2+'px; height: '+getRadius(grade)*2+'px; border-radius: 50%; margin-top: '+Math.max(0,(9-getRadius(grade)))+'px;"></i><i class="circlepadding" style="width: '+Math.max(2,(25-2*getRadius(grade)))+'px;"></i> ' + categories[i]);
-//    }
-//  div.innerHTML = labels.join('<br>');
-//  return div;
-//  };
-//  legend.addTo(map);
 
 
 
