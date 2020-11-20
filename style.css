@@ -28,7 +28,7 @@
 .sidenav {
   height: 100%;
   width: 250px;
-  position: fixed;
+  position: absolute;
   z-index: 3;
   top: 0;
   left: 0;
@@ -36,11 +36,38 @@
   overflow-x: hidden;
   padding-top: 1px;
   box-shadow:  2px 0 3px 0 #888888; 
+
+
+}
+#authorship{
+    bottom: 0;
+    color: #707070;
+      position: absolute; 
+    font-size: 15px;  
+     padding: 20px 20px 20px 20px;
+     font-family: Open Sans;
+
+}
+#authorship a{
+
+    color: #707070;
+      position: relative; 
+    font-size: 15px;  
+  display: inline;
+     font-family: Open Sans;
+
+
+}
+#authorship a:hover{
+
+    color: #f1f1f1;
+
+
 }
 
 
 .rightsidenav {
-  
+
   height: 100%;
   width: 0px;
   position: fixed;
@@ -67,7 +94,7 @@
 
 /* Page content */
 .main {
-  margin-left: 250px; /* Same as the width of the sidenav */
+  margin-left: 0px; 
 } 
 
 /* The navigation menu links */
@@ -89,14 +116,12 @@
 }
 
 
-
-
-/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 .main {
   transition: margin-left .5s;
-  padding: 20px;
+  padding: 0px;
   position: fixed;
   z-index: 1;
+
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
@@ -104,7 +129,11 @@
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 } 
+@media screen and (max-height: 600px) {
+#authorship {font-size: 0px;}
+#authorship a {font-size: 0px;}
 
+} 
 
 .logo {
   display: inline-block;
@@ -168,3 +197,4 @@
   text-shadow: 2px 2px 5px white;
   /* Use color, background, set margins for offset, etc */
 }
+

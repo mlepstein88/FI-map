@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html>
+
+<!-- Futures Initiative map showing the reach and impact of the program. 
+  Map designed by Michael L Epstein, Futures Initiative Graduate Fellow 2019-2020 
+  (Apologies in advance for any messy code you may encounter!) -->
+
 <head>
 	
 	<title>FI Map</title>
@@ -44,6 +49,8 @@
     <a id="program_teamtaught">Team Taught Courses</a>
     <br>
     <a id="program_partnerships">Institutional Partnerships</a> 
+
+    <div id="authorship">Map design<a href="https://sites.google.com/view/michaellewisepstein/"><br>Michael L. Epstein<br></a>Futures Initiative Graduate Fellow 2019-2020</div>
   </div>
 
 
@@ -91,24 +98,32 @@
 </div>
 
 
-    <script>
+
+<script>
 
 
 //set default values
-var lat = 40.73165;
-var lng = -73.85000;
+var lat = 40.735;
+var lng = -74.05;
 var zoom = 11;
 
 //create map
-var map = L.map('mapid', {zoomSnap: 0.25,zoomControl: true, position: 'topright'}).setView([40.73165, -73.8500], 11);
+var map = L.map('mapid', {zoomSnap: 0.25,zoomControl: true}).setView([lat, lng], 11);
+
 
 //add tiles
 var tiles = L.tileLayer('https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-   attribution: 'display',
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   maxZoom: 18,
   id: 'OSMCarto'
 })
 tiles.addTo(map);
+
+//move controls to right
+
+map.zoomControl.setPosition('topright');
+
+
 
 //insert cuny buildings - shapefiles borrowed from https://www.baruch.cuny.edu/confluence/display/geoportal/CUNY+Campus+Facilities - thanks!
 var shpfile = new L.Shapefile('cuny_buildings_2019.zip', {
@@ -296,11 +311,11 @@ function circleClick(e) {
 
 
   if (rightopen == false){
-    document.getElementById("rightside").style.width = "0px"; //currently set to 0 to hide it, if you want to add individual info change to 250px
+    document.getElementById("rightside").style.width = "0px"; //currently set to 0 to hide it, if you want to add individual school info (and I think this is an important future direction) change this to 250px
     document.getElementById("rightside").innerHTML = "<a><br><br>" + this.options.info + "</a>";
     rightopen=true;
     currschool=this.options.schoolname;
-    map.setView([this.options.lat, this.options.lng+.05], 12);
+    map.setView([this.options.lat, this.options.lng-.05], 12);
 
 
   } else if (rightopen == true && currschool==this.options.schoolname){
@@ -311,13 +326,13 @@ function circleClick(e) {
     if (this.options.ip==true){
       map.setView([40.76465, -73.95500], 12.50);
     } else {
-      map.setView([40.73965, -73.94500], 11);
+      map.setView([lat, lng], 11);
     }
 
   } else if (rightopen == true && currschool!=this.options.schoolname){
     document.getElementById("rightside").innerHTML = "<a><br><br>" + this.options.info + "</a>";
     currschool=this.options.schoolname;
-    map.setView([this.options.lat, this.options.lng+.05], 12);
+    map.setView([this.options.lat, this.options.lng-.05], 12);
   }
 }
 
@@ -353,7 +368,7 @@ document.getElementById("rightside").style.width = "0px";
 rightopen=false;
 
 //reset view and remove lines
-map.setView([40.73965, -73.94500], 11);
+map.setView([lat, lng-.05], 11);
 map.removeLayer(partnershipLines)
 
 
@@ -375,7 +390,7 @@ if (open1 == false){
 
   document.getElementById("infobar_leadership").style.width = "0px";
   document.getElementById("infobar_leadership").style.marginLeft = "0px";
-  map.setView([40.73165, -73.8500], 11);
+  map.setView([lat, lng], 11);
   open1 = false;
 }
 
@@ -402,7 +417,7 @@ rightopen=false;
 
 //reset view and remove lines
 
-map.setView([40.73965, -73.94500], 11);
+map.setView([lat, lng-.05], 11);
 map.removeLayer(partnershipLines)
 
 open1=false;
@@ -423,7 +438,7 @@ if (open2 == false){
   map.removeLayer(teamTaught);
   document.getElementById("infobar_teamtaught").style.width = "0px";
   document.getElementById("infobar_teamtaught").style.marginLeft = "0px";
-  map.setView([40.73165, -73.8500], 11);
+  map.setView([lat, lng], 11);
   open2 = false;
 }
 
@@ -460,7 +475,7 @@ document.getElementById("infobar_partnerships").style.marginLeft = "250px";
 open4 = true;
 
 //set view and add lines/labels
-map.setView([40.76465, -73.95500], 12.50);
+map.setView([lat+.03, lng+.04], 12.50);
 
 partnershipLines.addTo(map);
 partnershipLabels.addTo(map);
@@ -473,7 +488,7 @@ partnershipLabels.addTo(map);
 
   document.getElementById("infobar_partnerships").style.width = "0px";
   document.getElementById("infobar_partnerships").style.marginLeft = "0px";
-  map.setView([40.73165, -73.8500], 11);
+  map.setView([lat,lng], 11);
   open4 = false;
 }
 
